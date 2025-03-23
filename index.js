@@ -71,5 +71,5 @@ function keyboard(word) {
         "íyxcvbnm-"
     ];
 
-    return rows.filter(row => row.split('').some(c => word.includes(c))).length === 2;
+    return rows.filter(row => row.split('').some(c => word.toLowerCase().includes(c))).length === 2;
 }
