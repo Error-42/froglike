@@ -2,6 +2,10 @@ const puzzles = {
     "kulcstábla": {
         "title": "Kulcstábla",
         "checker": keyboard,
+    },
+    "kastély": {
+        "title": "Kastély",
+        "checker": wait,
     }
 }
 
@@ -72,4 +76,30 @@ function keyboard(word) {
     ];
 
     return rows.filter(row => row.split('').some(c => word.toLowerCase().includes(c))).length === 2;
+}
+
+/**
+ * @param {String} word
+ * @returns {bool}
+ */
+function wait(word) {
+    let pastWordsText = localStorage.getItem("pastWords");
+    let pastWords = pastWordsText === null ? {} : JSON.parse(pastWordsText);
+
+    if (pastWords[word] !== undefined) {
+        localStorage.setItem("lastInput", new Date().getTime());
+        return pastWords[word];
+    }
+
+    let lastInput = parseInt(localStorage.getItem("lastInput") ?? "0");
+    let currectTime = new Date().getTime();
+
+    let accepted = currectTime - lastInput > 15000;
+
+    pastWords[word] = accepted;
+
+    localStorage.setItem("pastWords", JSON.stringify(pastWords));
+    localStorage.setItem("lastInput", currectTime);
+
+    return accepted;
 }
