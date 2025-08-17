@@ -3,10 +3,12 @@ const puzzles = {
         "title": "Kulcstábla",
         "checker": keyboard,
     },
-    "kastély": {
-        "title": "Kastély",
-        "checker": wait,
-    }
+    // I don't like it anymore, it's mostly just annoying, and therefore it is removed.
+    // 
+    // "kastély": {
+    //     "title": "Kastély",
+    //     "checker": wait,
+    // }
 }
 
 var puzzle;
