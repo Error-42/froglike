@@ -1,8 +1,22 @@
 const puzzles = {
+    // Old name, equivalent to hard difficulty.
     "kulcstábla": {
-        "title": "Kulcstábla",
-        "checker": keyboard,
+        "title": "Kulcstábla (nehéz)",
+        "checker": word => countRows(word) === 2,
     },
+    "kulcstábla-könnyű": {
+        "title": "Kulcstábla (könnyű)",
+        "checker": word => countRows(word) === 1,
+    },
+    "kulcstábla-közepes": {
+        "title": "Kulcstábla (közepes)",
+        "checker": word => countRows(word) <= 2,
+    },
+    "kulcstábla-nehéz": {
+        "title": "Kulcstábla (nehéz)",
+        "checker": word => countRows(word) === 2,
+    },
+
     // I don't like it anymore, it's mostly just annoying, and therefore it is removed.
     // 
     // "kastély": {
@@ -67,9 +81,10 @@ function check() {
 }
 
 /**
- * word: string
+ * @param {String} word
+ * @returns {Number} 
  */
-function keyboard(word) {
+function countRows(word) {
     let rows = [
         "öüó",
         "qwertzuiopőú",
@@ -77,7 +92,7 @@ function keyboard(word) {
         "íyxcvbnm-"
     ];
 
-    return rows.filter(row => row.split('').some(c => word.toLowerCase().includes(c))).length === 2;
+    return rows.filter(row => row.split('').some(c => word.toLowerCase().includes(c))).length;
 }
 
 /**
